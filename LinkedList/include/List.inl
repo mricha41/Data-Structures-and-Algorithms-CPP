@@ -1,5 +1,7 @@
-#include <iostream>
 #include "List.hpp"
+
+#include <iostream>
+#include <utility>
 
 template <typename T>
 class Node
@@ -110,6 +112,59 @@ void List<T>::pushFront(T value)
 }
 
 template<typename T>
+void List<T>::insert(std::size_t pos, T value)
+{
+	Node<T>* p = m_head;
+	if (pos < 0 || pos > m_size)
+		return;
+
+	Node<T>* newNode = new Node<T>(value);
+	if (pos == 0)
+	{
+		newNode->m_next = m_head;
+		m_head = newNode;
+	}
+	else 
+	{
+		for (std::size_t i = 0; i < m_size - 1; ++i)
+			p = p->m_next;
+
+		newNode->m_next = p->m_next;
+		p->m_next = newNode;
+	}
+}
+
+template<typename T>
+void List<T>::sortedInsert(T value)
+{
+	Node<T>* newNode = new Node<T>(value);
+	newNode->m_next = nullptr;
+	Node<T>* q = nullptr;
+	Node<T>* p = m_head;
+
+	if (m_head == nullptr)
+		m_head = newNode;
+	else
+	{
+		while (p && p->m_data < value)
+		{
+			q = p;
+			p = p->m_next;
+		}
+		if (p == m_head)
+		{
+			newNode->m_next = m_head;
+			m_head = newNode;
+		}
+		else
+		{
+			newNode->m_next = q->m_next;
+			q->m_next = newNode;
+		}
+	}
+}
+
+template<typename T>
 T* List<T>::popBack()
 {
 	return NULL;
@@ -119,4 +174,28 @@ template<typename T>
 T* List<T>::popFront()
 {
 	return NULL;
+}
+
+template<typename T>
+void List<T>::sort()
+{
+	return;
+}
+
+template<typename T>
+bool List<T>::isSorted()
+{
+	Node<T>* temp = m_head;
+	T v = std::numeric_limits<T>::min();
+
+	while (temp != nullptr)
+	{
+		if (temp->m_data < v)
+			return false;
+
+		v = temp->m_data;
+		temp = temp->m_next;
+	}
+
+	return true;
 }

@@ -7,10 +7,6 @@ class Node;
 template <typename T>
 class List
 {
-private:
-	void setHead(Node<T>*& n) { m_head = n; };
-	void setTail(Node<T>*& n) { m_tail = n; };
-
 public:
 	List();
 	List(T value);
@@ -30,10 +26,15 @@ public:
 
 	void pushBack(T value);
 	void pushFront(T value);
+	void insert(std::size_t pos, T value);
+	void sortedInsert(T value);
 	T* popBack();
 	T* popFront();
 
 	int length() { return m_size; };
+
+	void sort();
+	bool isSorted();
 
 private:
 	std::size_t m_size;

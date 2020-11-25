@@ -10,16 +10,32 @@ int main()
 {
 	List<mine> first(15.7f);
 	first.pushBack(25.001f);
-	first.pushFront(666.575f);
-	first.pushBack(-99.654f);
-	first.pushFront(0.0f);
+	first.pushBack(66.575f);
+	first.pushBack(99.654f);
+	first.pushBack(100.0f);
 	first.pushBack(101.677f);
 
 	std::cout << "Number of elements: " << first.length() << "\n";
 
 	DisplayList(first);
 
+	first.insert(0, 10.f);
+
 	DisplayListRecursive(first.begin());
+
+	first.sortedInsert(35.f);
+
+	DisplayList(first);
+
+	first.sortedInsert(500.f);
+
+	DisplayList(first);
+
+	std::cout << "Sorted? " << first.isSorted() << "\n";
+
+	first.insert(0, 10000.f);
+
+	std::cout << "Sorted? " << first.isSorted() << "\n";
 
 	std::cout << "Sum: " << Sum(first) << "\n";
 	std::cout << "Sum recursive: " << SumRecursive(first.begin()) << "\n";
@@ -37,19 +53,20 @@ int main()
 	std::cout << "Min/Max recursive: " << pr.first << ", " << pr.second << "\n";
 
 	std::cout << "Found? " << (LinearSearch(first.begin(), 25.f) == nullptr ? "no..." : "yes!") << "\n";
-	std::cout << "Found? " << (LinearSearch(first.begin(), 666.575f) == nullptr ? "no..." : "yes!") << "\n";
+	std::cout << "Found? " << (LinearSearch(first.begin(), 66.575f) == nullptr ? "no..." : "yes!") << "\n";
 
 	std::cout << "Found? " << (LinearSearchRecursive(first.begin(), 25.f) == nullptr ? "no..." : "yes!") << "\n";
-	std::cout << "Found? " << (LinearSearchRecursive(first.begin(), 666.575f) == nullptr ? "no..." : "yes!") << "\n";
+	std::cout << "Found? " << (LinearSearchRecursive(first.begin(), 66.575f) == nullptr ? "no..." : "yes!") << "\n";
 
 	DisplayList(first);
 
 	//list is unchanged after search...
-	std::cout << "Found? " << (LinearSearchMoveToFrontOptimized(first, 25.f) == nullptr ? "no..." : "yes!") << "\n";
+	auto found = LinearSearchMoveToFrontOptimized(first, 25.f);
+	std::cout << "Found? " << (found == nullptr ? "no..." : std::to_string(found->m_data)) << "\n";
 	DisplayList(first);
 
 	//list changes after search...
-	auto found = LinearSearchMoveToFrontOptimized(first, 666.575f);
+	found = LinearSearchMoveToFrontOptimized(first, 66.575f);
 	std::cout << "Found? " << (found == nullptr ? "no..." : std::to_string(found->m_data)) << "\n";
 	DisplayList(first);
 

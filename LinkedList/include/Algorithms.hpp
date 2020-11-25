@@ -156,7 +156,7 @@ Node<T>* LinearSearchMoveToFrontOptimized(List<T>& list, T key)
 		{
 			prev->m_next = curr->m_next;
 			curr->m_next = list.begin();
-			list.setHead(curr);
+			list.m_head = curr;
 			return curr;
 		}
 
