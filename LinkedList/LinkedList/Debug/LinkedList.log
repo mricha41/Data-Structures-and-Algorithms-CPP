@@ -1,0 +1,3 @@
+﻿  main.cpp
+E:\programming\C++\Data_Structures\LinkedList\LinkedList\include\Algorithms.hpp(146): warning C4715: 'LinearSearchRecursive<float>': not all control paths return a value
+  LinkedList.vcxproj -> E:\programming\C++\Data_Structures\LinkedList\Debug\LinkedList.exe
