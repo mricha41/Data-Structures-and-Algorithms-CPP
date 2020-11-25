@@ -35,7 +35,32 @@ int main()
 
 	first.insert(0, 10000.f);
 
+	DisplayList(first);
+
 	std::cout << "Sorted? " << first.isSorted() << "\n";
+
+	std::cout << "Erased? " << first.erase(first.length()) << "\n";
+
+	DisplayList(first);
+
+	std::cout << "Erased? " << first.erase(0) << "\n";
+
+	DisplayList(first);
+
+	std::cout << "Sorted? " << first.isSorted() << "\n";
+
+	std::cout << "Erased? " << first.erase(1000) << "\n";
+
+	first.pushFront(10.f);
+	first.pushFront(10.f);
+	first.pushBack(101.677f);
+	first.pushBack(101.677f);
+
+	DisplayList(first);
+
+	first.unique();
+
+	DisplayList(first);
 
 	std::cout << "Sum: " << Sum(first) << "\n";
 	std::cout << "Sum recursive: " << SumRecursive(first.begin()) << "\n";

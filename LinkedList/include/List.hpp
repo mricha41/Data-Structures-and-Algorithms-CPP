@@ -30,11 +30,14 @@ public:
 	void sortedInsert(T value);
 	T* popBack();
 	T* popFront();
+	bool erase(std::size_t pos);
 
 	int length() { return m_size; };
 
 	void sort();
 	bool isSorted();
+
+	void unique();
 
 private:
 	std::size_t m_size;
