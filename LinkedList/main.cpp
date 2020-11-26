@@ -15,6 +15,32 @@ int main()
 	first.pushBack(100.0f);
 	first.pushBack(101.677f);
 
+	std::cout << "first..." << "\n";
+	DisplayList(first);
+
+	List<mine> second(50.f);
+	second.pushBack(40.f);
+	second.pushBack(10.f);
+	second.pushBack(30.f);
+	second.pushBack(20.f);
+
+	std::cout << "second..." << "\n";
+	DisplayList(second);
+
+	List<mine> third;
+
+	std::cout << "concatenation..." << "\n";
+	first.concatenate(first.begin(), second.begin(), third.begin());
+
+	std::cout << "first..." << "\n";
+	DisplayList(first);
+
+	std::cout << "second..." << "\n";
+	DisplayList(second);
+
+	std::cout << "third..." << "\n";
+	DisplayList(third);
+	
 	std::cout << "Number of elements: " << first.length() << "\n";
 
 	DisplayList(first);
@@ -62,6 +88,26 @@ int main()
 
 	DisplayList(first);
 
+	/*first.clear();
+
+	first.pushBack(10.f);
+	first.pushBack(10.f);
+	first.pushBack(10.f);
+
+	DisplayList(first);
+
+	first.unique();
+
+	DisplayList(first);*/
+
+	first.reverse();
+
+	DisplayList(first);
+
+	first.reverse(nullptr, first.begin());
+
+	DisplayList(first);
+
 	std::cout << "Sum: " << Sum(first) << "\n";
 	std::cout << "Sum recursive: " << SumRecursive(first.begin()) << "\n";
 
@@ -94,6 +140,6 @@ int main()
 	found = LinearSearchMoveToFrontOptimized(first, 66.575f);
 	std::cout << "Found? " << (found == nullptr ? "no..." : std::to_string(found->m_data)) << "\n";
 	DisplayList(first);
-
+	
 	return 0;
 }

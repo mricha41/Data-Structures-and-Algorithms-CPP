@@ -21,7 +21,7 @@ public:
 template<typename T>
 Node<T>::Node()
 :
-	m_data(),
+	m_data(T()),
 	m_next(nullptr)
 {
 
@@ -69,15 +69,21 @@ List<T>::~List()
 }
 
 template<typename T>
-inline void List<T>::clear()
+void List<T>::clear()
 {
+	if (m_head == nullptr)
+		return;
+
 	Node<T>* prev = nullptr;
-	//Node<T>* head = this->begin();
-	while (m_head)
+
+	while (m_head != nullptr)
 	{
 		m_head = m_head->m_next;
-		delete prev;
-		prev = m_head;
+		if (prev != nullptr)
+		{
+			delete prev;
+			prev = m_head;
+		}
 	}
 }
 
@@ -114,7 +120,7 @@ void List<T>::pushFront(T value)
 template<typename T>
 void List<T>::insert(std::size_t pos, T value)
 {
-	Node<T>* p = m_head;
+	Node<T>* curr = m_head;
 	if (pos < 0 || pos > m_size)
 		return;
 
@@ -127,10 +133,10 @@ void List<T>::insert(std::size_t pos, T value)
 	else 
 	{
 		for (std::size_t i = 0; i < m_size - 1; ++i)
-			p = p->m_next;
+			curr = curr->m_next;
 
-		newNode->m_next = p->m_next;
-		p->m_next = newNode;
+		newNode->m_next = curr->m_next;
+		curr->m_next = newNode;
 	}
 	m_size++;
 }
@@ -140,27 +146,27 @@ void List<T>::sortedInsert(T value)
 {
 	Node<T>* newNode = new Node<T>(value);
 	newNode->m_next = nullptr;
-	Node<T>* q = nullptr;
-	Node<T>* p = m_head;
+	Node<T>* temp = nullptr;
+	Node<T>* curr = m_head;
 
 	if (m_head == nullptr)
 		m_head = newNode;
 	else
 	{
-		while (p && p->m_data < value)
+		while (curr && curr->m_data < value)
 		{
-			q = p;
-			p = p->m_next;
+			temp = curr;
+			curr = curr->m_next;
 		}
-		if (p == m_head)
+		if (curr == m_head)
 		{
 			newNode->m_next = m_head;
 			m_head = newNode;
 		}
 		else
 		{
-			newNode->m_next = q->m_next;
-			q->m_next = newNode;
+			newNode->m_next = temp->m_next;
+			temp->m_next = newNode;
 		}
 		m_size++;
 	}
@@ -169,30 +175,27 @@ void List<T>::sortedInsert(T value)
 template<typename T>
 T* List<T>::popBack()
 {
-	return NULL;
+	return nullptr;
 }
 
 template<typename T>
 T* List<T>::popFront()
 {
-	return NULL;
+	return nullptr;
 }
 
 template<typename T>
 bool List<T>::erase(std::size_t pos)
 {
 	Node<T>* temp = nullptr;
-	Node<T>* p = m_head;
+	Node<T>* curr = m_head;
 
-	T x;
-	
 	if (pos < 0 || pos > m_size)
 		return false;
 
 	if (pos == 0)
 	{
 		temp = m_head;
-		x = m_head->m_data;
 		m_head = m_head->m_next;
 		delete temp;
 		m_size--;
@@ -201,13 +204,14 @@ bool List<T>::erase(std::size_t pos)
 	{
 		for (std::size_t i = 0; i < m_size - 1; ++i)
 		{
-			temp = p;
-			p = p->m_next;
+			temp = curr;
+			curr = curr->m_next;
 		}
-
-		temp->m_next = p->m_next;
-		x = p->m_data;
-		delete p;
+		
+		if(temp != nullptr)
+			temp->m_next = curr->m_next;
+		
+		delete curr;
 		m_size--;
 	}
 	return true;
@@ -240,23 +244,68 @@ bool List<T>::isSorted()
 template<typename T>
 void List<T>::unique()
 {
-	Node<T>* q = nullptr;
-	Node<T>* p = m_head;
-	if(p != nullptr && p->m_next != nullptr)
-		q = p->m_next;
+	Node<T>* temp = nullptr;
+	Node<T>* curr = m_head;
+	if(curr != nullptr && curr->m_next != nullptr)
+		temp = curr->m_next;
 
-	while (q != nullptr)
+	while (temp != nullptr)
 	{
-		if (p->m_data != q->m_data)
+		if (curr->m_data != temp->m_data)
 		{
-			p = q;
-			q = q->m_next;
+			curr = temp;
+			temp = temp->m_next;
 		}
 		else
 		{
-			p->m_next = q->m_next;
-			delete q;
-			q = p->m_next;
+			curr->m_next = temp->m_next;
+			delete temp;
+			temp = curr->m_next;
 		}
 	}
+}
+
+template<typename T>
+void List<T>::reverse()
+{
+	Node<T>* temp = nullptr;
+	Node<T>* temp2 = nullptr;
+	Node<T>* curr = m_head;
+
+	while (curr != nullptr)
+	{
+		temp2 = temp;
+		temp = curr;
+		curr = curr->m_next;
+		temp->m_next = temp2;
+	}
+	m_head = temp;
+}
+
+template<typename T>
+void List<T>::reverse(Node<T>* first, Node<T>* next)
+{
+	if (next != nullptr)
+	{
+		reverse(next, next->m_next);
+		next->m_next = first;
+	}
+	else
+	{
+		m_head = first;
+	}
+}
+
+template<typename T>
+void List<T>::concatenate(Node<T>* first, Node<T>* other, Node<T>* third)
+{
+	third = first;
+
+	while (first->m_next != nullptr)
+	{
+		first = first->m_next;
+		m_size++;
+	}
+	
+	first->m_next = other;
 }

@@ -19,11 +19,12 @@ public:
 	template<typename T>
 	friend Node<T>* LinearSearchMoveToFrontOptimized(List<T>& list, T key);
 
+	//element access
 	Node<T>*& begin() { return m_head; };
 	Node<T>*& end() { return m_tail; };
 
+	//modifiers
 	void clear();
-
 	void pushBack(T value);
 	void pushFront(T value);
 	void insert(std::size_t pos, T value);
@@ -32,12 +33,16 @@ public:
 	T* popFront();
 	bool erase(std::size_t pos);
 
+	//capacity
 	int length() { return m_size; };
 
+	//operations
 	void sort();
 	bool isSorted();
-
 	void unique();
+	void reverse();
+	void reverse(Node<T>* first, Node<T>* next);
+	void concatenate(Node<T>* first, Node<T>* other, Node<T>* third);
 
 private:
 	std::size_t m_size;

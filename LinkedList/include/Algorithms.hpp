@@ -139,7 +139,7 @@ Node<T>* LinearSearchRecursive(Node<T>* first, T key)
 		return nullptr;
 	
 	if (key == first->m_data)
-		first;
+		return first;
 		
 	else
 		return LinearSearchRecursive(first->m_next, key);
@@ -154,7 +154,9 @@ Node<T>* LinearSearchMoveToFrontOptimized(List<T>& list, T key)
 	{
 		if (key == curr->m_data)
 		{
-			prev->m_next = curr->m_next;
+			if(prev != nullptr)
+				prev->m_next = curr->m_next;
+			
 			curr->m_next = list.begin();
 			list.m_head = curr;
 			return curr;
