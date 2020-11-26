@@ -43,6 +43,8 @@ public:
 	void reverse();
 	void reverse(Node<T>* first, Node<T>* next);
 	void concatenate(Node<T>* first, Node<T>* other, Node<T>* third);
+	void merge(Node<T>* first, Node<T>* other, Node<T>* third);
+	bool isLoop();
 
 private:
 	std::size_t m_size;

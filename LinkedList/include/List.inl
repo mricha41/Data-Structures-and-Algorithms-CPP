@@ -309,3 +309,62 @@ void List<T>::concatenate(Node<T>* first, Node<T>* other, Node<T>* third)
 	
 	first->m_next = other;
 }
+
+template<typename T>
+void List<T>::merge(Node<T>* first, Node<T>* other, Node<T>* third)
+{
+	Node<T>* last;
+	if (first->m_data < other->m_data)
+	{
+		third = last = first;
+		first = first->m_next;
+		third->m_next = nullptr;
+	}
+	else
+	{
+		third = last = other;
+		other = other->m_next;
+		third->m_next = nullptr;
+	}
+	
+	while (first != nullptr && other != nullptr)
+	{
+		if (first->m_data < other->m_data)
+		{
+			last->m_next = first;
+			last = first;
+			first = first->m_next;
+			last->m_next = nullptr;
+		}
+		else
+		{
+			last->m_next = other;
+			last = other;
+			other = other->m_next;
+			last->m_next = nullptr;
+		}
+	}
+
+	if (first != nullptr)
+		last->m_next = first;
+	if (other != nullptr)
+		last->m_next = other;
+}
+
+template<typename T>
+bool List<T>::isLoop()
+{
+	Node<T>* p = nullptr, * q =  nullptr, * first = m_head;
+	p = q = first;
+	do
+	{
+		p = p->m_next;
+		q = q->m_next;
+		q = q ? q->m_next : q;
+	} while (p && q && p != q);
+
+	if (p == q)
+		return true;
+
+	return false;
+}

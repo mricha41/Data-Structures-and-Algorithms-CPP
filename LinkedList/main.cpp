@@ -40,6 +40,35 @@ int main()
 
 	std::cout << "third..." << "\n";
 	DisplayList(third);
+
+	third.pushBack(10.f);
+	third.pushBack(20.f);
+	third.pushBack(30.f);
+	third.pushBack(40.f);
+	third.pushBack(50.f);
+
+	List<mine> fourth(5.f);
+	fourth.pushBack(15.f);
+	fourth.pushBack(25.f);
+	fourth.pushBack(35.f);
+	fourth.pushBack(45.f);
+
+	List<mine> fifth;
+
+	third.merge(third.begin(), fourth.begin(), fifth.begin());
+
+	std::cout << "Merged into third: " << "\n";
+	DisplayList(third);
+
+	//works, but hangs console
+	//if it is in fact looped
+	/*std::cout << "looped? " << first.isLoop() << "\n";
+
+	Node<mine>* t1 = first.begin()->m_next->m_next;
+	Node<mine>* t2 = first.begin()->m_next->m_next->m_next->m_next;
+	t2->m_next = t1;
+
+	std::cout << "looped? " << first.isLoop() << "\n";*/
 	
 	std::cout << "Number of elements: " << first.length() << "\n";
 
