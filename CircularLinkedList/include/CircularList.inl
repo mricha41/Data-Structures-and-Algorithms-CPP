@@ -83,6 +83,7 @@ void CircularList<T>::pushBack(T value)
 
 	if (this->m_head == nullptr) {
 		this->m_head = newNode;
+		m_size++;
 		return;
 	}
 
@@ -160,9 +161,37 @@ void CircularList<T>::insert(std::size_t pos, T value)
 }
 
 template <typename T>
-void CircularList<T>::erase(std::size_t pos)
+bool CircularList<T>::erase(std::size_t pos)
 {
 
+	Node<T>* temp = nullptr;
+	Node<T>* curr = m_head;
+
+	if (pos < 0 || pos > m_size)
+		return false;
+
+	if (pos == 0)
+	{
+		temp = m_head;
+		m_head = m_head->m_next;
+		delete temp;
+		m_size--;
+	}
+	else
+	{
+		for (std::size_t i = 0; i < m_size - 1; ++i)
+		{
+			temp = curr;
+			curr = curr->m_next;
+		}
+
+		if (temp != nullptr)
+			temp->m_next = curr->m_next;
+
+		delete curr;
+		m_size--;
+	}
+	return true;
 }
 
 template <typename T>

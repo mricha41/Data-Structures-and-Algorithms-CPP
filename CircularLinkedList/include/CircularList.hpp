@@ -21,7 +21,7 @@ public:
 	void pushBack(T value);
 	void pushFront(T value);
 	void insert(std::size_t pos, T value);
-	void erase(std::size_t pos);
+	bool erase(std::size_t pos);
 	void clear();
 
 	//capacity

@@ -69,5 +69,17 @@ int main()
 	std::cout << "empty?" << "\n";
 	DisplayList(test);
 
+	test.pushBack(12.f);
+	test.pushBack(70.f);
+	test.pushBack(304.f);
+	test.pushBack(1.f);
+
+	DisplayList(test);
+
+	test.erase(3);
+	test.erase(0);
+
+	DisplayList(test);
+
 	return 0;
 }

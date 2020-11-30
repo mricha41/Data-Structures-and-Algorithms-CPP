@@ -117,17 +117,18 @@ int main()
 
 	DisplayList(first);
 
-	/*first.clear();
+	List<mine> testUnique(10.f);
+	testUnique.pushBack(10.f);
+	testUnique.pushBack(10.f);
+	testUnique.pushBack(10.f);
 
-	first.pushBack(10.f);
-	first.pushBack(10.f);
-	first.pushBack(10.f);
+	DisplayList(testUnique);
 
-	DisplayList(first);
+	testUnique.unique();
 
-	first.unique();
+	std::cout << "unique length: " << testUnique.length() << "\n";
 
-	DisplayList(first);*/
+	DisplayList(testUnique);
 
 	first.reverse();
 
