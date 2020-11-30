@@ -5,6 +5,9 @@
 template<typename T>
 void DisplayList(List<T>& list)
 {
+	if (list.length() < 1)
+		return;
+
 	Node<T>* temp = list.begin();
 	while (temp != nullptr)
 	{
@@ -27,6 +30,7 @@ void DisplayListRecursive(Node<T>* first)
 //Numeric Operations
 //only make sense for numeric values
 //works for any type where the + operator is overloaded
+
 template<typename T>
 T Sum(List<T>& list)
 {

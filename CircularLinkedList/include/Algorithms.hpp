@@ -5,6 +5,9 @@
 template<typename T>
 void DisplayList(CircularList<T>& list)
 {
+	if (list.length() < 1)
+		return;
+
 	Node<T>* temp = list.begin();
 	do
 	{

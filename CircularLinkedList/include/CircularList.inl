@@ -15,15 +15,13 @@ public:
 
 	T m_data;
 	Node<T>* m_next;
-	Node<T>* m_prev;
 };
 
 template<typename T>
 Node<T>::Node()
 :
 	m_data(T()),
-	m_next(nullptr),
-	m_prev(nullptr)
+	m_next(nullptr)
 {
 
 }
@@ -32,8 +30,7 @@ template <typename T>
 Node<T>::Node(T value)
 :
 	m_data(value),
-	m_next(nullptr),
-	m_prev(nullptr)
+	m_next(nullptr)
 {
 
 }
@@ -42,8 +39,7 @@ template <typename T>
 Node<T>::Node(T value, Node<T>* next, Node<T>* prev)
 	:
 	m_data(value),
-	m_next(next),
-	m_prev(prev)
+	m_next(next)
 {
 
 }
@@ -68,7 +64,7 @@ template<typename T>
 CircularList<T>::CircularList(T value)
 :
 	m_size(1),
-	m_head(new Node<T>(value, m_head, m_head)),
+	m_head(new Node<T>(value)),
 	m_tail(nullptr)
 {
 	
@@ -77,15 +73,114 @@ CircularList<T>::CircularList(T value)
 template <typename T>
 CircularList<T>::~CircularList()
 {
-	
+	clear();
 }
 
 template<typename T>
 void CircularList<T>::pushBack(T value)
 {
-	Node<T>* temp = new Node<T>(value);
-	Node<T>* last = begin();
-	temp->m_next = last->m_next;
-	last->m_next = temp;
-	last = temp;
+	Node<T>* newNode = new Node<T>(value);
+
+	if (this->m_head == nullptr) {
+		this->m_head = newNode;
+		return;
+	}
+
+	Node<T>* curr = this->m_head;
+
+	while (curr && curr->m_next) {
+		curr = curr->m_next;
+	}
+
+	curr->m_next = newNode;
+	m_size++;
+}
+
+template<typename T>
+void CircularList<T>::pushFront(T value)
+{
+	Node<T>* newNode = new Node<T>(value);
+	if (m_head == nullptr)
+	{
+		m_head = newNode;
+		m_head->m_next = m_head;
+	}
+	else
+	{
+		Node<T>* curr = m_head;
+
+		while (curr != nullptr && curr->m_next != m_head)
+			curr = curr->m_next;
+		
+		if(curr != nullptr)
+			curr->m_next = newNode;
+		
+		newNode->m_next = m_head;
+		m_head = newNode;
+	}
+	m_size++;
+}
+
+template<typename T>
+void CircularList<T>::insert(std::size_t pos, T value)
+{
+	Node<T>* curr = m_head;
+	if (pos < 0 || pos > m_size)
+		return;
+
+	Node<T>* newNode = new Node<T>(value);
+	if (pos == 0)
+	{
+		if (m_head == nullptr)
+		{
+			m_head = newNode;
+			m_head->m_next = m_head;
+		}
+		else
+		{
+			while (curr != nullptr && curr->m_next != m_head)
+				curr = curr->m_next;
+
+			if(curr != nullptr)
+				curr->m_next = newNode;
+			
+			newNode->m_next = m_head;
+			m_head = newNode;
+		}
+	}
+	else
+	{
+		for (std::size_t i = 0; i < pos - 1; ++i)
+			curr = curr->m_next;
+
+		newNode->m_next = curr->m_next;
+		curr->m_next = newNode;
+	}
+	m_size++;
+}
+
+template <typename T>
+void CircularList<T>::erase(std::size_t pos)
+{
+
+}
+
+template <typename T>
+void CircularList<T>::clear()
+{
+	if (m_head == nullptr)
+		return;
+
+	Node<T>* prev = nullptr;
+
+	while (m_head != nullptr)
+	{
+		m_head = m_head->m_next;
+		if (prev != nullptr)
+		{
+			delete prev;
+			prev = m_head;
+		}
+	}
+	m_size = 0;
 }

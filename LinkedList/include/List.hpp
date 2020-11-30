@@ -35,6 +35,7 @@ public:
 
 	//capacity
 	int length() { return m_size; };
+	std::size_t count();
 
 	//operations
 	void sort();

@@ -85,6 +85,8 @@ void List<T>::clear()
 			prev = m_head;
 		}
 	}
+
+	m_size = 0;
 }
 
 template<typename T>
@@ -217,6 +219,24 @@ bool List<T>::erase(std::size_t pos)
 	return true;
 }
 
+//count is a useful when a
+//modifying operation results
+//in a necessary change to the length
+//of the list
+template<typename T>
+std::size_t List<T>::count()
+{
+	std::size_t count = 0;
+	Node<T>* curr = m_head;
+	while (curr != nullptr)
+	{
+		count++;
+		curr = curr->m_next;
+	}
+
+	return count;
+}
+
 template<typename T>
 void List<T>::sort()
 {
@@ -263,6 +283,10 @@ void List<T>::unique()
 			temp = curr->m_next;
 		}
 	}
+
+	//reset the internal size
+	//...but need to count to see what it is
+	m_size = count();
 }
 
 template<typename T>
