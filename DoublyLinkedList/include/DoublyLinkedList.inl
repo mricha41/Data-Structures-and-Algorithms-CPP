@@ -113,7 +113,32 @@ void DoublyLinkedList<T>::pushFront(T value)
 template<typename T>
 void DoublyLinkedList<T>::insert(std::size_t pos, T value)
 {
+	if (pos < 0 || pos > m_size)
+		return;
+
+	Node<T>* curr = m_head;
+	Node<T>* newNode = new Node<T>(value, nullptr, nullptr);
 	
+	if (pos == 0)
+	{
+		newNode->m_next = m_head;
+		m_head->m_prev = newNode;
+		m_head = newNode;
+	}
+	else
+	{
+		for (std::size_t i = 0; i < pos - 1; ++i)
+			curr = curr->m_next;
+
+		newNode->m_prev = curr;
+		newNode->m_next = curr->m_next;
+		
+		if (curr->m_next != nullptr)
+			curr->m_next->m_prev = newNode;
+		
+		curr->m_next = newNode;
+	}
+	m_size++;
 }
 
 template <typename T>

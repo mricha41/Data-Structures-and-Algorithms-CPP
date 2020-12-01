@@ -8,12 +8,15 @@ typedef float mine;
 
 int main()
 {
-	DoublyLinkedList<mine> first(15.7f);
-	first.pushBack(25.001f);
-	first.pushBack(66.575f);
-	first.pushBack(99.654f);
-	first.pushBack(100.0f);
-	first.pushBack(101.677f);
+	DoublyLinkedList<mine> first(10.f);
+	first.pushBack(20.f);
+	first.pushBack(30.f);
+	first.pushBack(40.f);
+	first.pushBack(50.f);
+	
+	first.insert(2, 25.f);
+	first.insert(6, 55.f);
+	first.insert(0, 5.f);
 
 	std::cout << "first length: " << first.length() << "\n";
 
