@@ -144,7 +144,32 @@ void DoublyLinkedList<T>::insert(std::size_t pos, T value)
 template <typename T>
 bool DoublyLinkedList<T>::erase(std::size_t pos)
 {
-	return false;
+	Node<T>* curr = m_head;
+
+	if (pos < 0 || pos > m_size - 1)
+		return false;
+
+	if (pos == 0)
+	{
+		m_head = m_head->m_next;
+		if (m_head != nullptr)
+			m_head->m_prev = nullptr;
+
+		delete curr;
+	}
+	else
+	{
+		for (std::size_t i = 0; i < pos; ++i)
+			curr = curr->m_next;
+
+		curr->m_prev->m_next = curr->m_next;
+		if (curr->m_next != nullptr)
+			curr->m_next->m_prev = curr->m_prev;
+
+		delete curr;
+	}
+
+	return true;
 }
 
 template <typename T>
