@@ -177,3 +177,21 @@ void DoublyLinkedList<T>::clear()
 {
 	
 }
+
+template<typename T>
+void DoublyLinkedList<T>::reverse()
+{
+	Node<T>* temp = nullptr;
+	Node<T>* curr = m_head;
+
+	while (curr != nullptr)
+	{
+		temp = curr->m_next;
+		curr->m_next = curr->m_prev;
+		curr->m_prev = temp;
+		curr = curr->m_prev;
+
+		if (curr != nullptr && curr->m_next == nullptr)
+			m_head = curr;
+	}
+}

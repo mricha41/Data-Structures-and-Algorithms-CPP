@@ -33,5 +33,10 @@ int main()
 	std::cout << "first after erase..." << "\n";
 	DisplayList(first);
 
+	first.reverse();
+
+	std::cout << "first after reverse..." << "\n";
+	DisplayList(first);
+
 	return 0;
 }

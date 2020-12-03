@@ -27,6 +27,9 @@ public:
 	//capacity
 	int length() { return m_size; };
 
+	//operations
+	void reverse();
+
 private:
 	std::size_t m_size;
 	Node<T>* m_head;
