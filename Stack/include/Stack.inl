@@ -6,7 +6,8 @@ Stack<stackSize, C1>::Stack()
     :
     m_maxSize(stackSize),
     m_size(0),
-    m_top(0)
+    m_top(0),
+    m_data{}
 {
     
 }

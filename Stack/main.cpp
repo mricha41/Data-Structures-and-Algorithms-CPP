@@ -24,6 +24,7 @@ int main()
 	std::cout << "Peek at the top of stack: " << mystack.top() << "\n\n";
 
 	Stack<5, int> test = {};
+	std::cout << "Peek at the top of stack: " << test.top() << "\n\n";
 	test.push(10);
 	test.push(20);
 	test.push(30);
