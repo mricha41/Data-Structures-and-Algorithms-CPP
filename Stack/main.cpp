@@ -23,7 +23,7 @@ int main()
 
 	std::cout << "Peek at the top of stack: " << mystack.top() << "\n\n";
 
-	Stack<5, int> test;
+	Stack<5, int> test = {};
 	test.push(10);
 	test.push(20);
 	test.push(30);

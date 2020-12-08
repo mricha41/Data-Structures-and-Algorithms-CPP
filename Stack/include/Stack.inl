@@ -6,8 +6,7 @@ Stack<stackSize, C1>::Stack()
     :
     m_maxSize(stackSize),
     m_size(0),
-    m_top(0),
-    m_data{}
+    m_top(0)
 {
     
 }
@@ -55,10 +54,17 @@ const C1& Stack<stackSize, C1>::operator [] (std::size_t index) const
 template <std::size_t stackSize, class C1>
 void Stack<stackSize, C1>::push(C1 value)
 {
-    assert((m_top >= 0 || m_top < m_maxSize - 1) && "Stack overflow!\n");
+    assert((m_top < m_maxSize - 1) && "Stack overflow!\n");
 
-    m_top++;
-    m_data[m_top] = value;
+    if (m_size == 0)
+    {
+        m_data[m_top] = value;
+    }
+    else
+    {
+        m_top++;
+        m_data[m_top] = value;
+    }
 
     m_size++;
 }
