@@ -27,10 +27,10 @@ bool MatchParenthesis(char* expression)
     for (std::size_t i = 0; expression[i] != '\0'; ++i)
     {
         //printf("current char: %c\n", expression[i]);
-        if (expression[i] == '(')
+        if (expression[i] == '{' || expression[i] == '[' || expression[i] == '(')
             stack.push(expression[i]);
         
-        else if (expression[i] == ')')
+        else if (expression[i] == '}' || expression[i] == ']' || expression[i] == ')')
         {
             if (stack.size() == 0)
                 return false;
