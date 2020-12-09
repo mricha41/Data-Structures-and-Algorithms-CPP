@@ -88,7 +88,7 @@ void Stack<stackSize, C1>::push(C1 value)
 template <std::size_t stackSize, class C1>
 C1 Stack<stackSize, C1>::pop()
 {
-    assert((m_top >= 0) && "Stack underflow!\n");
+    assert((m_size > 0 && m_top >= 0) && "Stack underflow!\n");
     
     if (m_top > 0)
     {
