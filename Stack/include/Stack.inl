@@ -29,6 +29,21 @@ Stack<stackSize, C1>::~Stack()
 {
 
 }
+template <std::size_t stackSize, class C1>
+C1& Stack<stackSize, C1>::top() 
+{ 
+    assert((m_top >= 0 && m_top < m_maxSize) && "Stack overflow or underflow occurred!\n");
+
+    return m_data[m_top];
+}
+
+template <std::size_t stackSize, class C1>
+C1& Stack<stackSize, C1>::peek(std::size_t index)
+{
+    assert(((int)index >= 0 && index < m_size) && (m_top - index >= 0) && "Invalid index for this stack!");
+
+    return m_data[m_top - index];
+}
 
 template <std::size_t stackSize, class C1>
 C1& Stack<stackSize, C1>::operator [] (std::size_t index)
@@ -71,10 +86,16 @@ void Stack<stackSize, C1>::push(C1 value)
 }
 
 template <std::size_t stackSize, class C1>
-C1& Stack<stackSize, C1>::pop()
+C1 Stack<stackSize, C1>::pop()
 {
     assert((m_top >= 0) && "Stack underflow!\n");
     
-    m_size--;
-    return m_data[m_top--];
+    if (m_top > 0)
+    {
+        m_size--;
+        return m_data[m_top--];
+    }
+
+    std::cout << "Stack is empty, empty value returned." << "\n";
+    return C1();
 }

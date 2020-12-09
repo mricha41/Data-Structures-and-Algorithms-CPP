@@ -16,14 +16,15 @@ public:
 	~Stack();
 
 	//element access
-	C1& top() { return m_data[m_top]; };
+	C1& top();
+	C1& peek(std::size_t index);
 
 	C1& operator [] (std::size_t index);
 	const C1& operator [] (std::size_t index) const;
 	
 	//modifiers
 	void push(C1 value);
-	C1& pop();
+	C1 pop();
 
 	//capacity
 	std::size_t maxSize() { return m_maxSize; };
