@@ -5,12 +5,12 @@
 
 int main()
 {
-	CircularQueue<10, int> queue;// = { 10, 20, 30, 40, 50 };
-	queue.push(10);
+	CircularQueue<6, int> queue = { 10, 20, 30, 40, 50 };
+	/*queue.push(10);
 	queue.push(20);
 	queue.push(30);
 	queue.push(40);
-	queue.push(50);
+	queue.push(50);*/
 
 	std::cout << "front: " << queue.front() << "\n" << "back: " << queue.back() << "\n";
 	
@@ -29,10 +29,10 @@ int main()
 
 	Display(queue);
 
-	CircularQueue<10, std::string> msgs;
-	msgs.push("hola, ");
-	msgs.push("mr. ");
-	msgs.push("hand!");
+	CircularQueue<7, std::string> msgs = { "hola, " , "mr. ", "hand!" };
+	//msgs.push("hola, ");
+	//msgs.push("mr. ");
+	//msgs.push("hand!");
 	std::cout << "front: " << msgs.front() << "\n" << "back: " << msgs.back() << "\n";
 
 	Display(msgs);
@@ -51,9 +51,9 @@ int main()
 
 	//Display(msgs); //will fail assert if uncommented
 
-	msgs.push("hello, ");
-	msgs.push("there ");
-	msgs.push("world!");
+	msgs.push("hola, ");
+	msgs.push("mr. ");
+	msgs.push("hand!");
 
 	Display(msgs);
 	

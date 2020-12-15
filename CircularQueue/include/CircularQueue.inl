@@ -19,11 +19,11 @@ CircularQueue<queueSize, C1>::CircularQueue(T... elements)
     :
     m_data{ elements... },
     m_maxSize(queueSize),
-    m_size(queueSize),
-    m_front(0),
-    m_back(queueSize)
+    m_front(0)
 {
     assert((sizeof...(elements) > 0) && "Instantiate the array with more than zero elements.");
+    m_size = sizeof...(elements);
+    m_back = m_size;
 }
 
 template <std::size_t queueSize, class C1>
